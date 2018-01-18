@@ -3,6 +3,7 @@ package com.kevin.carservice.activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,7 +17,9 @@ import com.kevin.carservice.R;
 import com.kevin.carservice.RequestCode;
 import com.kevin.carservice.adapter.PicViewAdapter;
 import com.kevin.carservice.base.BaseActivity;
+import com.kevin.carservice.utils.DisplayUtils;
 import com.kevin.carservice.utils.GifSizeFilter;
+import com.kevin.carservice.view.another.SpaceItemDecoration;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
@@ -36,7 +39,7 @@ import butterknife.BindView;
  */
 
 
-public class MaintainAddActivity extends BaseActivity implements View.OnClickListener {
+public class MaintainAddActivity extends BaseActivity implements View.OnClickListener, PicViewAdapter.OnRecyclerItemClickListener {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -199,20 +202,21 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
     public void initView() {
         tvTitle.setText("新增");
 
-        mDriversLicenseAdapter = new PicViewAdapter(this, uris);
-        mDrivingLicenseAdapter = new PicViewAdapter(this, uris1);
-        mLightAdapter = new PicViewAdapter(this, uris2);
-        mWiperBladeAdapter = new PicViewAdapter(this, uris3);
-        mStorageBatteryAdapter = new PicViewAdapter(this, uris4);
-        mCoolingLiquidAdapter = new PicViewAdapter(this, uris5);
-        mPowerFluidAdapter = new PicViewAdapter(this, uris6);
-        mAirFilterAdapter = new PicViewAdapter(this, uris7);
-        mCabinFilterAdapter = new PicViewAdapter(this, uris8);
-        mAirDamperAdapter = new PicViewAdapter(this, uris9);
-        mEngineAdapter = new PicViewAdapter(this, uris10);
-        mChassisAttachmentAdapter = new PicViewAdapter(this, uris11);
-        mChassisScrewAdapter = new PicViewAdapter(this, uris12);
-        mMaintainDocumentAdapter = new PicViewAdapter(this, uris13);
+        mDriversLicenseAdapter = new PicViewAdapter(this, uris, RequestCode.CHOOSE_DRIVERS_LICENSE);
+        mDrivingLicenseAdapter = new PicViewAdapter(this, uris1, RequestCode.CHOOSE_DRIVING_LICENSE);
+        mLightAdapter = new PicViewAdapter(this, uris2, RequestCode.CHOOSE_LIGHT);
+        mWiperBladeAdapter = new PicViewAdapter(this, uris3, RequestCode.CHOOSE_WIPER_BLADE);
+        mStorageBatteryAdapter = new PicViewAdapter(this, uris4, RequestCode.CHOOSE_STORAGE_BATTERY);
+        mCoolingLiquidAdapter = new PicViewAdapter(this, uris5, RequestCode.CHOOSE_COOLING_LIQUID);
+        mPowerFluidAdapter = new PicViewAdapter(this, uris6, RequestCode.CHOOSE_POWER_FLUID);
+        mAirFilterAdapter = new PicViewAdapter(this, uris7, RequestCode.CHOOSE_AIR_FILTER);
+        mCabinFilterAdapter = new PicViewAdapter(this, uris8, RequestCode.CHOOSE_CABIN_FILTER);
+        mAirDamperAdapter = new PicViewAdapter(this, uris9, RequestCode.CHOOSE_AIR_DAMPER);
+        mEngineAdapter = new PicViewAdapter(this, uris10, RequestCode.CHOOSE_ENGINE);
+        mChassisAttachmentAdapter = new PicViewAdapter(this, uris11, RequestCode.CHOOSE_CHASSIS_ATTACHMENT);
+        mChassisScrewAdapter = new PicViewAdapter(this, uris12, RequestCode.CHOOSE_CHASSIS_SCREW);
+        mMaintainDocumentAdapter = new PicViewAdapter(this, uris13, RequestCode.CHOOSE_MAINTAIN_DOCUMENT);
+
 
         rvRecyclerViewDriversLicense.setLayoutManager(new GridLayoutManager(this, 3));
         rvRecyclerViewDrivingLicense.setLayoutManager(new GridLayoutManager(this, 3));
@@ -228,6 +232,10 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
         rvRecyclerViewChassisAttachment.setLayoutManager(new GridLayoutManager(this, 3));
         rvRecyclerViewChassisScrew.setLayoutManager(new GridLayoutManager(this, 3));
         rvRecyclerViewMaintainDocument.setLayoutManager(new GridLayoutManager(this, 3));
+
+        SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(DisplayUtils.dip2px(this, 5), 3);
+        rvRecyclerViewDriversLicense.addItemDecoration(spaceItemDecoration);
+        rvRecyclerViewDrivingLicense.addItemDecoration(spaceItemDecoration);
 
         rvRecyclerViewDriversLicense.setAdapter(mDriversLicenseAdapter);
         rvRecyclerViewDrivingLicense.setAdapter(mDrivingLicenseAdapter);
@@ -276,6 +284,22 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
         ivMaintainDocument.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+
+        mDriversLicenseAdapter.setOnRecyclerItemClickListener(this);
+        mDrivingLicenseAdapter.setOnRecyclerItemClickListener(this);
+        mLightAdapter.setOnRecyclerItemClickListener(this);
+        mWiperBladeAdapter.setOnRecyclerItemClickListener(this);
+        mStorageBatteryAdapter.setOnRecyclerItemClickListener(this);
+        mCoolingLiquidAdapter.setOnRecyclerItemClickListener(this);
+        mPowerFluidAdapter.setOnRecyclerItemClickListener(this);
+        mAirFilterAdapter.setOnRecyclerItemClickListener(this);
+        mCabinFilterAdapter.setOnRecyclerItemClickListener(this);
+        mAirDamperAdapter.setOnRecyclerItemClickListener(this);
+        mEngineAdapter.setOnRecyclerItemClickListener(this);
+        mChassisScrewAdapter.setOnRecyclerItemClickListener(this);
+        mChassisScrewAdapter.setOnRecyclerItemClickListener(this);
+        mMaintainDocumentAdapter.setOnRecyclerItemClickListener(this);
+
     }
 
     @Override
@@ -348,7 +372,7 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
                 choosePics(RequestCode.CHOOSE_MAINTAIN_DOCUMENT);
                 break;
             case R.id.btn_save:
-                showToast("报存");
+                showToast("保存");
                 break;
             case R.id.btn_submit:
                 showToast("提交");
@@ -380,6 +404,7 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
             setImageByRequestCode(requestCode, data);
         }
     }
+
 
     private void setImageByRequestCode(int requestCode, Intent data) {
         switch (requestCode) {
@@ -464,4 +489,124 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
     }
 
 
+    @Override
+    public void onRecyclerItemClick(int requestCode, int position) {
+        switch (requestCode) {
+            case RequestCode.CHOOSE_DRIVERS_LICENSE:
+                startScaleActivity(uris, position);
+                break;
+            case RequestCode.CHOOSE_DRIVING_LICENSE:
+                startScaleActivity(uris1, position);
+                break;
+            case RequestCode.CHOOSE_LIGHT:
+                startScaleActivity(uris2, position);
+                break;
+            case RequestCode.CHOOSE_WIPER_BLADE:
+                startScaleActivity(uris3, position);
+                break;
+            case RequestCode.CHOOSE_STORAGE_BATTERY:
+                startScaleActivity(uris4, position);
+                break;
+            case RequestCode.CHOOSE_COOLING_LIQUID:
+                startScaleActivity(uris5, position);
+                break;
+            case RequestCode.CHOOSE_POWER_FLUID:
+                startScaleActivity(uris6, position);
+                break;
+            case RequestCode.CHOOSE_AIR_FILTER:
+                startScaleActivity(uris7, position);
+                break;
+            case RequestCode.CHOOSE_CABIN_FILTER:
+                startScaleActivity(uris8, position);
+                break;
+            case RequestCode.CHOOSE_AIR_DAMPER:
+                startScaleActivity(uris9, position);
+                break;
+            case RequestCode.CHOOSE_ENGINE:
+                startScaleActivity(uris10, position);
+                break;
+            case RequestCode.CHOOSE_CHASSIS_ATTACHMENT:
+                startScaleActivity(uris11, position);
+                break;
+            case RequestCode.CHOOSE_CHASSIS_SCREW:
+                startScaleActivity(uris12, position);
+                break;
+            case RequestCode.CHOOSE_MAINTAIN_DOCUMENT:
+                startScaleActivity(uris13, position);
+                break;
+        }
+    }
+
+    @Override
+    public void onItemDeleteClick(int requestCode, int position) {
+        switch (requestCode) {
+            case RequestCode.CHOOSE_DRIVERS_LICENSE:
+                mDriversLicenseAdapter.deleteData(uris, position);
+                break;
+            case RequestCode.CHOOSE_DRIVING_LICENSE:
+                mDrivingLicenseAdapter.deleteData(uris1, position);
+                break;
+            case RequestCode.CHOOSE_LIGHT:
+                startScaleActivity(uris2, position);
+                break;
+            case RequestCode.CHOOSE_WIPER_BLADE:
+                startScaleActivity(uris3, position);
+                break;
+            case RequestCode.CHOOSE_STORAGE_BATTERY:
+                startScaleActivity(uris4, position);
+                break;
+            case RequestCode.CHOOSE_COOLING_LIQUID:
+                startScaleActivity(uris5, position);
+                break;
+            case RequestCode.CHOOSE_POWER_FLUID:
+                startScaleActivity(uris6, position);
+                break;
+            case RequestCode.CHOOSE_AIR_FILTER:
+                startScaleActivity(uris7, position);
+                break;
+            case RequestCode.CHOOSE_CABIN_FILTER:
+                startScaleActivity(uris8, position);
+                break;
+            case RequestCode.CHOOSE_AIR_DAMPER:
+                startScaleActivity(uris9, position);
+                break;
+            case RequestCode.CHOOSE_ENGINE:
+                startScaleActivity(uris10, position);
+                break;
+            case RequestCode.CHOOSE_CHASSIS_ATTACHMENT:
+                startScaleActivity(uris11, position);
+                break;
+            case RequestCode.CHOOSE_CHASSIS_SCREW:
+                startScaleActivity(uris12, position);
+                break;
+            case RequestCode.CHOOSE_MAINTAIN_DOCUMENT:
+                startScaleActivity(uris13, position);
+                break;
+        }
+    }
+
+
+    private void startScaleActivity(List<Uri> uri, int position) {
+        Intent intent = new Intent(this, MaintainDetailImageScaleActivity.class);
+        Bundle bundle = new Bundle();
+        ArrayList<String> stringList = uriToString(uri);
+        bundle.putStringArrayList("uris", stringList);
+        bundle.putString("position", String.valueOf(position));
+        intent.putExtra("bundle", bundle);
+        startActivity(intent);
+    }
+
+    /**
+     * 将uri集合转为string集合
+     *
+     * @param uri
+     * @return
+     */
+    private ArrayList<String> uriToString(List<Uri> uri) {
+        ArrayList<String> x = new ArrayList<>();
+        for (Uri uri1 : uri) {
+            x.add(uri1.toString());
+        }
+        return x;
+    }
 }

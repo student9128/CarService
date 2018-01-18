@@ -28,6 +28,7 @@ public class PicViewAdapter extends RecyclerView.Adapter<PicViewAdapter.MyViewHo
     private List<Uri> mUris;
     private List<String> mPaths;
     private Context context;
+    private int requestCode;
 
     public PicViewAdapter(Context context) {
         this.context = context;
@@ -38,10 +39,22 @@ public class PicViewAdapter extends RecyclerView.Adapter<PicViewAdapter.MyViewHo
         this.mUris = uris;
     }
 
+    public PicViewAdapter(Context context, List<Uri> uris, int requestCode) {
+        this.context = context;
+        this.mUris = uris;
+        this.requestCode = requestCode;
+    }
+
     public void setData(List<Uri> uris) {
 //        mUris = uris;
         mUris.addAll(uris);
         notifyDataSetChanged();
+    }
+
+    public void deleteData(List<Uri> uris, int position) {
+        uris.remove(uris.get(position));
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(0, uris.size());
     }
 
     @Override
@@ -52,11 +65,28 @@ public class PicViewAdapter extends RecyclerView.Adapter<PicViewAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         Glide.with(context)
                 .load(mUris.get(position))
+                .centerCrop()
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onRecyclerItemClick(requestCode, position);
+                }
+            }
+        });
+        holder.imageDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemDeleteClick(requestCode, position);
+                }
+            }
+        });
     }
 
     @Override
@@ -68,9 +98,29 @@ public class PicViewAdapter extends RecyclerView.Adapter<PicViewAdapter.MyViewHo
         @BindView(R.id.iv_image_1)
         ImageView imageView;
 
+        @BindView(R.id.iv_delete)
+        ImageView imageDelete;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    /**
+     * 图片点击事件
+     *
+     * @param listener
+     */
+    public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    private OnRecyclerItemClickListener listener;
+
+    public interface OnRecyclerItemClickListener {
+        void onRecyclerItemClick(int requestCode, int position);
+
+        void onItemDeleteClick(int requestCode, int position);
     }
 }
