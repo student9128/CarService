@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_maintain_detail">
+
+
+    <LinearLayout style="@style/DetailItemStyle">
+
+        <TextView
+            style="@style/DetailKeyStyle"
+            android:text="姓名：" />
+
+        <EditText
+            android:id="@+id/tv_name"
+            style="@style/DetailValueStyle"
+            android:hint="请输入姓名"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout style="@style/DetailItemStyle">
+
+        <TextView
+            style="@style/DetailKeyStyle"
+            android:text="车牌号：" />
+
+        <EditText
+            android:id="@+id/tv_plate_number"
+            style="@style/DetailValueStyle"
+            android:hint="请输入车牌号"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout style="@style/DetailItemStyle">
+
+        <TextView
+            style="@style/DetailKeyStyle"
+            android:text="电话：" />
+
+        <EditText
+            android:id="@+id/tv_phone_number"
+            style="@style/DetailValueStyle"
+            android:hint="请输入电话号码"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout style="@style/DetailItemStyle">
+
+        <TextView
+            style="@style/DetailKeyStyle"
+            android:text="车型：" />
+
+        <EditText
+            android:id="@+id/tv_car_type"
+            style="@style/DetailValueStyle"
+            android:hint="请输入车型"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout style="@style/DetailItemStyle">
+
+        <TextView
+            style="@style/DetailKeyStyle"
+            android:text="服务专员：" />
+
+        <EditText
+            android:id="@+id/tv_service_specialist"
+            style="@style/DetailValueStyle"
+            android:hint="请输入服务专员"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
+
+    <LinearLayout style="@style/DetailItemStyle">
+
+        <TextView
+            style="@style/DetailKeyStyle"
+            android:text="日期：" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/DetailValueStyle"
+            android:hint="请选择日期"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+</merge>

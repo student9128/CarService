@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_maintain_detail">
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <TextView
+            style="@style/DetailItemSortTitle"
+            android:text="*驾驶证" />
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_drivers_license"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_drivers_license"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_driver_license_comments"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+
+        <TextView
+            style="@style/DetailItemSortTitle"
+            android:text="*行驶证" />
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_driving_license"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_driving_license"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_driving_license_comments"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+
+        <TextView
+            style="@style/DetailItemSortTitle"
+            android:text="*全车灯光" />
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_light"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_light"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_light"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*雨刮片" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清洁" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更换" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_wiper_blade"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_wiper_blade"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_wiper_blade"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*电瓶及充电电压" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实施" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_storage_battery"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_storage_battery"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_storage_battery"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*冷却液" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清洁" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更换" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_cooling_liquid"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_cooling_liquid"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_cooling_liquid"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*动力转向液" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清洁" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更换" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_power_fluid"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_power_fluid"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_power_fluid"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*空气滤芯" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清洁" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更换" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_air_filter"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_air_filter"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_air_filter"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*空调滤芯" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清洁" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更换" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_cabin_filter"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_cabin_filter"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_cabin_filter"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*节气门" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清洁" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更换" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_air_damper"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_air_damper"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_air_damper"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*发动机异响" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实施" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_engine"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_engine"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_engine"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/layout_maintain_detail_thread_depth" />
+
+    <include layout="@layout/layout_maintain_detail_brake_lining" />
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*底盘连接件" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实施" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_chassis_attachment"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_chassis_attachment"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_chassis_attachment"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*底盘螺丝" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实施" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_add_chassis_screw"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_chassis_screw"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_chassis_screw"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/DetailItemContainerStyle">
+
+        <LinearLayout
+            style="@style/DetailItemSortTitle"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DetailItemSortSubTitle"
+                android:text="*车辆保养档案表" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实施" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/DetailItemImageContainerStyle">
+
+            <ImageView
+                android:id="@+id/iv_maintain_document"
+                style="@style/DetailItemAddPic"
+                android:src="@drawable/ic_add_box" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recycler_view_maintain_document"
+                style="@style/DetailItemImageRecycler"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout style="@style/DetailItemCommentContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注：" />
+
+            <EditText
+                android:id="@+id/et_maintain_document"
+                style="@style/DetailItemCommentBox" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/uniform_padding"
+        android:paddingLeft="@dimen/padding_30"
+        android:paddingRight="@dimen/padding_30"
+        android:paddingTop="@dimen/padding_10">
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/uniform_margin"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button"
+            android:text="保存"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/uniform_margin"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button"
+            android:text="提交"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

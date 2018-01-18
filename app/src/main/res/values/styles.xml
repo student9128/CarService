@@ -1,0 +1,114 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="ToolbarText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/textSize20</item>
+        <!--<item name="android:fontFamily">OpenSans-SemiBold.ttf</item>-->
+    </style>
+
+    <style name="DetailKeyStyle">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/textSize15</item>
+    </style>
+
+    <style name="DetailValueStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/textSize15</item>
+
+    </style>
+
+    <style name="DetailItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/padding_5</item>
+        <item name="android:paddingRight">@dimen/padding_5</item>
+        <item name="android:paddingTop">@dimen/padding_10</item>
+        <item name="android:paddingBottom">@dimen/padding_10</item>
+
+    </style>
+
+    <!--类型标题-->
+    <style name="DetailItemSortTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_detail_item_sort_title</item>
+        <item name="android:paddingBottom">@dimen/padding_5</item>
+        <item name="android:layout_marginLeft">@dimen/margin_5</item>
+        <item name="android:layout_marginRight">@dimen/margin_5</item>
+        <item name="android:paddingTop">@dimen/padding_5</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textSize12</item>
+    </style>
+
+    <style name="DetailItemSortSubTitle">
+        <item name="android:textSize">@dimen/textSize12</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DetailItemAddPic">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
+
+    <style name="DetailItemCommentContainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/padding_5</item>
+        <item name="android:paddingRight">@dimen/padding_5</item>
+    </style>
+
+    <style name="DetailItemCommentBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_comment_box</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/textSize14</item>
+    </style>
+
+    <style name="DetailItemContainerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/padding_8</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="DetailItemImageRecycler">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_5</item>
+    </style>
+
+    <style name="DetailItemImageContainerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/padding_5</item>
+        <item name="android:layout_marginBottom">@dimen/padding_5</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+
+</resources>
