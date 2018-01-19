@@ -38,7 +38,7 @@ public class MaintainDetailActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_function:
+            case R.id.tv_function:
                 startNewActivity(MaintainAddActivity.class);
                 break;
         }

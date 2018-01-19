@@ -1,5 +1,6 @@
 package com.kevin.carservice.activity;
 
+import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,17 +24,18 @@ import com.kevin.carservice.RequestCode;
 import com.kevin.carservice.adapter.PicViewAdapter;
 import com.kevin.carservice.base.BaseActivity;
 import com.kevin.carservice.utils.DisplayUtils;
-import com.kevin.carservice.utils.GifSizeFilter;
 import com.kevin.carservice.view.another.SpaceItemDecoration;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
-import com.zhihu.matisse.filter.Filter;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import top.zibin.luban.Luban;
@@ -381,6 +384,8 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initListener() {
+        tvDate.setOnClickListener(this);
+
         ivAddDriversLicense.setOnClickListener(this);
         ivAddDrivingLicense.setOnClickListener(this);
         ivAddLight.setOnClickListener(this);
@@ -434,6 +439,9 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_date:
+                showDatePickerDialog();
+                break;
             case R.id.iv_add_drivers_license:
                 choosePics(RequestCode.CHOOSE_DRIVERS_LICENSE);
                 break;
@@ -541,6 +549,32 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    Calendar myCalendar = Calendar.getInstance();
+
+    private void showDatePickerDialog() {
+        new DatePickerDialog(this, d, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+            String myFormat = "yyyy-MM-dd"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CHINA);
+            String date = sdf.format(myCalendar.getTime());
+            tvDate.setText(date);
+        }
+
+    };
+
+
     private void choosePics(int requestCode) {
         Matisse.from(this)
                 .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
@@ -550,7 +584,7 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
                 .captureStrategy(
                         new CaptureStrategy(true, "com.kevin.carservice.fileprovider"))
                 .maxSelectable(3)
-                .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+//                .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                 .gridExpectedSize(
                         getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
