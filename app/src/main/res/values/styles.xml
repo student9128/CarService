@@ -19,6 +19,8 @@
         <!--<item name="android:fontFamily">OpenSans-SemiBold.ttf</item>-->
     </style>
 
+
+//==============================================================================
     <style name="DetailKeyStyle">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -67,8 +69,9 @@
     </style>
 
     <style name="DetailItemAddPic">
-        <item name="android:layout_width">60dp</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+
     </style>
 
     <style name="DetailItemCommentContainer">
@@ -111,5 +114,17 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <style name="DetailItemImageDelete">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="DetailItemImageDeleteContainer">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+    </style>
 
 </resources>

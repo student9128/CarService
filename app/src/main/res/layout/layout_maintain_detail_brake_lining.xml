@@ -26,6 +26,7 @@
             android:textSize="@dimen/textSize12" />
 
         <CheckBox
+            android:id="@+id/cb_brake_lining"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -34,7 +35,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_marginBottom="@dimen/margin_5"
         android:layout_marginLeft="@dimen/margin_10"
         android:layout_marginRight="@dimen/margin_10"
@@ -53,10 +54,18 @@
             android:layout_alignParentTop="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_add_left_front_brake_lining"
-                style="@style/DetailItemAddPic"
-                android:src="@drawable/ic_add_box" />
+            <RelativeLayout style="@style/DetailItemImageDeleteContainer">
+
+                <ImageView
+                    android:id="@+id/iv_add_left_front_brake_lining"
+                    style="@style/DetailItemAddPic"
+                    android:src="@drawable/ic_add_box" />
+
+                <ImageView
+                    android:id="@+id/iv_delete_left_front_brake"
+                    style="@style/DetailItemImageDelete"
+                    android:src="@drawable/ic_delete_pic" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -82,10 +91,18 @@
             android:layout_alignParentLeft="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_add_left_rear_brake_lining"
-                style="@style/DetailItemAddPic"
-                android:src="@drawable/ic_add_box" />
+            <RelativeLayout style="@style/DetailItemImageDeleteContainer">
+
+                <ImageView
+                    android:id="@+id/iv_add_left_rear_brake_lining"
+                    style="@style/DetailItemAddPic"
+                    android:src="@drawable/ic_add_box" />
+
+                <ImageView
+                    android:id="@+id/iv_delete_left_rear_brake"
+                    style="@style/DetailItemImageDelete"
+                    android:src="@drawable/ic_delete_pic" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -111,10 +128,18 @@
             android:layout_alignParentTop="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_add_right_front_brake_lining"
-                style="@style/DetailItemAddPic"
-                android:src="@drawable/ic_add_box" />
+            <RelativeLayout style="@style/DetailItemImageDeleteContainer">
+
+                <ImageView
+                    android:id="@+id/iv_add_right_front_brake_lining"
+                    style="@style/DetailItemAddPic"
+                    android:src="@drawable/ic_add_box" />
+
+                <ImageView
+                    android:id="@+id/iv_delete_right_front_brake"
+                    style="@style/DetailItemImageDelete"
+                    android:src="@drawable/ic_delete_pic" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -140,10 +165,18 @@
             android:layout_alignParentRight="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_add_right_rear_brake_lining"
-                style="@style/DetailItemAddPic"
-                android:src="@drawable/ic_add_box" />
+            <RelativeLayout style="@style/DetailItemImageDeleteContainer">
+
+                <ImageView
+                    android:id="@+id/iv_add_right_rear_brake_lining"
+                    style="@style/DetailItemAddPic"
+                    android:src="@drawable/ic_add_box" />
+
+                <ImageView
+                    android:id="@+id/iv_delete_right_rear_brake"
+                    style="@style/DetailItemImageDelete"
+                    android:src="@drawable/ic_delete_pic" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"

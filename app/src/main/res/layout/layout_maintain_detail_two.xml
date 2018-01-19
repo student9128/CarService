@@ -13,8 +13,7 @@
             style="@style/DetailItemSortTitle"
             android:text="*驾驶证" />
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_drivers_license"
@@ -46,8 +45,7 @@
             style="@style/DetailItemSortTitle"
             android:text="*行驶证" />
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_driving_license"
@@ -79,8 +77,7 @@
             style="@style/DetailItemSortTitle"
             android:text="*全车灯光" />
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_light"
@@ -116,6 +113,7 @@
                 android:text="*雨刮片" />
 
             <CheckBox
+                android:id="@+id/cb_wiper_blade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -125,6 +123,7 @@
                 android:text="清洁" />
 
             <CheckBox
+                android:id="@+id/cb_wiper_blade_clean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -134,13 +133,13 @@
                 android:text="更换" />
 
             <CheckBox
+                android:id="@+id/cb_wiper_blade_replace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_wiper_blade"
@@ -176,6 +175,7 @@
                 android:text="*电瓶及充电电压" />
 
             <CheckBox
+                android:id="@+id/cb_storage_battery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -185,14 +185,14 @@
                 android:text="实施" />
 
             <CheckBox
+                android:id="@+id/cb_storage_battery_carry_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_storage_battery"
@@ -228,6 +228,7 @@
                 android:text="*冷却液" />
 
             <CheckBox
+                android:id="@+id/cb_cooling_liquid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -237,6 +238,7 @@
                 android:text="清洁" />
 
             <CheckBox
+                android:id="@+id/cb_cooling_liquid_clean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -246,14 +248,14 @@
                 android:text="更换" />
 
             <CheckBox
+                android:id="@+id/cb_cooling_liquid_replace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_cooling_liquid"
@@ -289,6 +291,7 @@
                 android:text="*动力转向液" />
 
             <CheckBox
+                android:id="@+id/cb_power_fluid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -298,6 +301,7 @@
                 android:text="清洁" />
 
             <CheckBox
+                android:id="@+id/cb_power_fluid_clean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -307,14 +311,14 @@
                 android:text="更换" />
 
             <CheckBox
+                android:id="@+id/cb_power_fluid_replace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_power_fluid"
@@ -350,6 +354,7 @@
                 android:text="*空气滤芯" />
 
             <CheckBox
+                android:id="@+id/cb_air_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -359,6 +364,7 @@
                 android:text="清洁" />
 
             <CheckBox
+                android:id="@+id/cb_air_filter_clean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -368,14 +374,14 @@
                 android:text="更换" />
 
             <CheckBox
+                android:id="@+id/cb_air_filter_replace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_air_filter"
@@ -411,6 +417,7 @@
                 android:text="*空调滤芯" />
 
             <CheckBox
+                android:id="@+id/cb_cabin_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -420,6 +427,7 @@
                 android:text="清洁" />
 
             <CheckBox
+                android:id="@+id/cb_cabin_filter_clean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -429,14 +437,14 @@
                 android:text="更换" />
 
             <CheckBox
+                android:id="@+id/cb_cabin_filter_replace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_cabin_filter"
@@ -472,6 +480,7 @@
                 android:text="*节气门" />
 
             <CheckBox
+                android:id="@+id/cb_air_damper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -481,6 +490,7 @@
                 android:text="清洁" />
 
             <CheckBox
+                android:id="@+id/cb_air_damper_clean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -490,14 +500,14 @@
                 android:text="更换" />
 
             <CheckBox
+                android:id="@+id/cb_air_damper_replace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_air_damper"
@@ -533,6 +543,7 @@
                 android:text="*发动机异响" />
 
             <CheckBox
+                android:id="@+id/cb_engine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -542,14 +553,14 @@
                 android:text="实施" />
 
             <CheckBox
+                android:id="@+id/cb_engine_carry_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_engine"
@@ -589,6 +600,7 @@
                 android:text="*底盘连接件" />
 
             <CheckBox
+                android:id="@+id/cb_chassis_attachment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -598,14 +610,14 @@
                 android:text="实施" />
 
             <CheckBox
+                android:id="@+id/cb_chassis_attachment_carry_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_add_chassis_attachment"
@@ -641,6 +653,7 @@
                 android:text="*底盘螺丝" />
 
             <CheckBox
+                android:id="@+id/cb_chassis_screw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -650,6 +663,7 @@
                 android:text="实施" />
 
             <CheckBox
+                android:id="@+id/cb_chassis_screw_carry_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -692,6 +706,7 @@
                 android:text="*车辆保养档案表" />
 
             <CheckBox
+                android:id="@+id/cb_maintain_document"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -701,14 +716,14 @@
                 android:text="实施" />
 
             <CheckBox
+                android:id="@+id/cb_maintain_document_carry_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
 
-        <LinearLayout
-            style="@style/DetailItemImageContainerStyle">
+        <LinearLayout style="@style/DetailItemImageContainerStyle">
 
             <ImageView
                 android:id="@+id/iv_maintain_document"
