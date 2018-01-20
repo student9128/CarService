@@ -3,10 +3,12 @@
     package="com.kevin.carservice">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,9 +31,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths_public"></meta-data>
         </provider>
+
         <activity android:name=".activity.MaintainDetailActivity" />
         <activity android:name=".activity.MaintainAddActivity" />
-        <activity android:name=".activity.MaintainDetailImageScaleActivity"/>
+        <activity android:name=".activity.MaintainDetailImageScaleActivity" />
+        <activity android:name=".activity.MaintainSearchActivity"/>
     </application>
 
 </manifest>

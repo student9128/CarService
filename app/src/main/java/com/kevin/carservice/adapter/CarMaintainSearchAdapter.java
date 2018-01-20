@@ -25,19 +25,19 @@ import butterknife.ButterKnife;
  */
 
 
-public class CarMaintainAdapter extends RecyclerView.Adapter<CarMaintainAdapter.MyViewHolder> {
+public class CarMaintainSearchAdapter extends RecyclerView.Adapter<CarMaintainSearchAdapter.MyViewHolder> {
 
     private Context context;
     List<CarMaintainBean.CTNTBean> data;
 
-    public CarMaintainAdapter(Context context, List<CarMaintainBean.CTNTBean> data) {
+    public CarMaintainSearchAdapter(Context context, List<CarMaintainBean.CTNTBean> data) {
         this.context = context;
         this.data = data;
     }
 
     public void addData(List<CarMaintainBean.CTNTBean> d) {
-        data.clear();
-        data.addAll(d);
+        this.data.clear();
+        this.data.addAll(d);
         notifyDataSetChanged();
 
     }

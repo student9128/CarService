@@ -25,56 +25,34 @@
             android:layout_marginRight="@dimen/uniform_margin"
             android:layout_marginTop="@dimen/margin_10"
             android:background="@drawable/bg_search_box"
-            android:gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_5"
-            android:paddingTop="@dimen/padding_5">
+            android:padding="@dimen/padding_5"
+            android:paddingBottom="@dimen/padding_5">
 
             <ImageView
                 android:id="@+id/iv_search"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/margin_5"
                 android:src="@drawable/ic_search" />
 
-            <TextView
-                android:id="@+id/tv_name_search"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/et_name_search"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:hint="请输入搜索关键字搜索"
+                android:textColor="@color/black"
                 android:textSize="@dimen/textSize13" />
         </LinearLayout>
 
     </RelativeLayout>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/smart_refresh"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:id="@+id/refresh_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAccentColor="@color/gray"
-            app:srlClassicsSpinnerStyle="FixedBehind"
-            app:srlTextSizeTitle="@dimen/textSize12"
-            app:srlTextSizeTime="@dimen/textSize12"
-            app:srlDrawableArrowSize="@dimen/textSize16"
-            app:srlPrimaryColor="@color/white" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-        </FrameLayout>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
