@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +39,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 
-public class MaintainSearchActivity extends BaseActivity implements TextWatcher {
+public class MaintainSearchActivity extends BaseActivity implements TextWatcher, CarMaintainSearchAdapter.OnRecyclerItemClickListener, View.OnClickListener {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.iv_search)
@@ -50,6 +51,7 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher 
     @BindView(R.id.rv_recycler_view)
     RecyclerView rvRecyclerView;
     private CarDao carDao;
+    private List<CarMaintainBean.CTNTBean> data = new ArrayList<>();
     private List<CarMaintainBean.CTNTBean> datax = new ArrayList<>();
     private List<CarMaintainBean.CTNTBean> searchData = new ArrayList<>();
     private CarMaintainSearchAdapter mAdapter;
@@ -73,13 +75,15 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         dividerItemDecoration.setDivider(R.drawable.bg_recycler_divider);
         rvRecyclerView.addItemDecoration(dividerItemDecoration);
-//        mAdapter = new CarMaintainSearchAdapter(this, searchData);
-//        rvRecyclerView.setAdapter(mAdapter);
+        mAdapter = new CarMaintainSearchAdapter(this, data);
+        rvRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initListener() {
         etNameSearch.addTextChangedListener(this);
+        mAdapter.setOnRecyclerViewItemClickListener(this);
+        tvFunction.setOnClickListener(this);
     }
 
     @Override
@@ -100,13 +104,10 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher 
                     searchData.add(datax.get(i));
                 }
             }
-//            mAdapter.addData(searchData);
-            mAdapter = new CarMaintainSearchAdapter(this, searchData);
-            rvRecyclerView.setAdapter(mAdapter);
+            mAdapter.addData(searchData);
         } else {
             searchData.clear();
-            mAdapter = new CarMaintainSearchAdapter(this, searchData);
-            rvRecyclerView.setAdapter(mAdapter);
+            mAdapter.addData(searchData);
         }
     }
 
@@ -141,4 +142,17 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher 
                 });
     }
 
+    @Override
+    public void onRecyclerViewItemClick(int position) {
+        startNewActivity(MaintainDetailActivity.class);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_function:
+                startNewActivity(MaintainAddActivity.class);
+                break;
+        }
+    }
 }

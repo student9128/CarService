@@ -19,11 +19,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.kevin.carservice.R;
 import com.kevin.carservice.RequestCode;
 import com.kevin.carservice.adapter.PicViewAdapter;
 import com.kevin.carservice.base.BaseActivity;
+import com.kevin.carservice.base.BaseObserver;
+import com.kevin.carservice.bean.MaintainAddSaveImageBean;
+import com.kevin.carservice.constant.Constant;
+import com.kevin.carservice.http.AppRetrofit;
 import com.kevin.carservice.utils.DisplayUtils;
+import com.kevin.carservice.utils.UuidUtils;
 import com.kevin.carservice.view.another.SpaceItemDecoration;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -31,13 +37,23 @@ import com.zhihu.matisse.engine.impl.PicassoEngine;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -305,6 +321,34 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
     private List<String> path20 = new ArrayList<>();
     private List<String> path21 = new ArrayList<>();
 
+    //修改完名字后的路径
+    private List<String> afterPath = new ArrayList<>();
+    private List<String> afterPath1 = new ArrayList<>();
+    private List<String> afterPath2 = new ArrayList<>();
+    private List<String> afterPath3 = new ArrayList<>();
+    private List<String> afterPath4 = new ArrayList<>();
+    private List<String> afterPath5 = new ArrayList<>();
+    private List<String> afterPath6 = new ArrayList<>();
+    private List<String> afterPath7 = new ArrayList<>();
+    private List<String> afterPath8 = new ArrayList<>();
+    private List<String> afterPath9 = new ArrayList<>();
+    private List<String> afterPath10 = new ArrayList<>();
+    private List<String> afterPath11 = new ArrayList<>();
+    private List<String> afterPath12 = new ArrayList<>();
+    private List<String> afterPath13 = new ArrayList<>();
+
+    private List<String> afterPath14 = new ArrayList<>();
+    private List<String> afterPath15 = new ArrayList<>();
+    private List<String> afterPath16 = new ArrayList<>();
+    private List<String> afterPath17 = new ArrayList<>();
+    private List<String> afterPath18 = new ArrayList<>();
+    private List<String> afterPath19 = new ArrayList<>();
+    private List<String> afterPath20 = new ArrayList<>();
+    private List<String> afterPath21 = new ArrayList<>();
+
+    private List<List<String>> listPath = new ArrayList<>();
+    private List<String> listKey = new ArrayList<>();
+
     @Override
     public int setLayoutResId() {
         return R.layout.activity_maintain_add;
@@ -313,7 +357,6 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void initView() {
         tvTitle.setText("新增");
-
         mDriversLicenseAdapter = new PicViewAdapter(this, uris, RequestCode.CHOOSE_DRIVERS_LICENSE);
         mDrivingLicenseAdapter = new PicViewAdapter(this, uris1, RequestCode.CHOOSE_DRIVING_LICENSE);
         mLightAdapter = new PicViewAdapter(this, uris2, RequestCode.CHOOSE_LIGHT);
@@ -379,7 +422,10 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initData() {
-
+        for (int i = 0; i < 10; i++) {
+            String s = UuidUtils.generateUuid();
+            printLogd("uuid:\t" + i + "===" + s);
+        }
     }
 
     @Override
@@ -510,6 +556,9 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_save:
                 showToast("保存");
+                initAllKey();
+                addAllPath();
+                saveImages();
                 break;
             case R.id.btn_submit:
                 showToast("提交");
@@ -517,36 +566,184 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
             case R.id.iv_delete_left_front:
                 ivAddLeftFront.setImageResource(R.drawable.ic_add_box);
                 ivDeleteLeftFront.setVisibility(View.INVISIBLE);
+                afterPath14.clear();
                 break;
             case R.id.iv_delete_left_rear:
                 ivAddLeftRear.setImageResource(R.drawable.ic_add_box);
                 ivDeleteLeftRear.setVisibility(View.INVISIBLE);
+                afterPath15.clear();
                 break;
             case R.id.iv_delete_right_front:
                 ivAddRightFront.setImageResource(R.drawable.ic_add_box);
                 ivDeleteRightFront.setVisibility(View.INVISIBLE);
+                afterPath16.clear();
                 break;
             case R.id.iv_delete_right_rear:
                 ivAddRightRear.setImageResource(R.drawable.ic_add_box);
                 ivDeleteRightRear.setVisibility(View.INVISIBLE);
+                afterPath17.clear();
                 break;
             case R.id.iv_delete_left_front_brake:
                 ivAddLeftFrontBrakeLining.setImageResource(R.drawable.ic_add_box);
                 ivDeleteLeftFrontBrake.setVisibility(View.INVISIBLE);
+                afterPath18.clear();
                 break;
             case R.id.iv_delete_left_rear_brake:
                 ivAddLeftRearBrakeLining.setImageResource(R.drawable.ic_add_box);
                 ivDeleteLeftRearBrake.setVisibility(View.INVISIBLE);
+                afterPath19.clear();
                 break;
             case R.id.iv_delete_right_front_brake:
                 ivAddRightFrontBrakeLining.setImageResource(R.drawable.ic_add_box);
                 ivDeleteRightFrontBrake.setVisibility(View.INVISIBLE);
+                afterPath20.clear();
                 break;
             case R.id.iv_delete_right_rear_brake:
                 ivAddRightRearBrakeLining.setImageResource(R.drawable.ic_add_box);
                 ivDeleteRightRearBrake.setVisibility(View.INVISIBLE);
+                afterPath21.clear();
                 break;
         }
+    }
+
+    private void initAllKey() {
+//        saveImages(afterPath, "jsz_zp");
+//        saveImages(afterPath1, "xsz_zp");
+//        saveImages(afterPath2, "qcdg_zp");
+//        saveImages(afterPath3, "ygp_zp");
+//        saveImages(afterPath4, "dpjcddy_zp");
+//        saveImages(afterPath5, "lqy_zp");
+//        saveImages(afterPath6, "dlzxy_zp");
+//        saveImages(afterPath7, "kqlx_zp");
+//        saveImages(afterPath8, "ktlx_zp");
+//        saveImages(afterPath9, "jqm_zp");
+//        saveImages(afterPath10, "fdjyx_zp");
+//        saveImages(afterPath11, "dpljj_zp");
+//        saveImages(afterPath12, "dpls_zp");
+//        saveImages(afterPath13, "clbydab_zp");
+//
+//        saveImages(afterPath14, "lthwsdzq_zp");//轮胎花纹深度
+//        saveImages(afterPath15, "lthwsdzh_zp");
+//        saveImages(afterPath16, "lthwsdyq_zp");
+//        saveImages(afterPath17, "lthwsdyh_zp");
+//        saveImages(afterPath18, "zdmcphdzq_zp");//制动摩擦片剩余厚度
+//        saveImages(afterPath19, "zdmcphdzh_zp");
+//        saveImages(afterPath20, "zdmcphdyq_zp");
+//        saveImages(afterPath21, "zdmcphdyh_zp");
+
+        listKey.add("jsz_zp");
+        listKey.add("xsz_zp");
+        listKey.add("qcdg_zp");
+        listKey.add("ygp_zp");
+        listKey.add("dpjcddy_zp");
+        listKey.add("lqy_zp");
+        listKey.add("dlzxy_zp");
+        listKey.add("kqlx_zp");
+        listKey.add("ktlx_zp");
+        listKey.add("jqm_zp");
+        listKey.add("fdjyx_zp");
+        listKey.add("dpljj_zp");
+        listKey.add("dpls_zp");
+        listKey.add("clbydab_zp");
+
+        listKey.add("lthwsdzq_zp");//轮胎花纹深度
+        listKey.add("lthwsdzh_zp");
+        listKey.add("lthwsdyq_zp");
+        listKey.add("lthwsdyh_zp");
+        listKey.add("zdmcphdzq_zp");//制动摩擦片剩余厚度
+        listKey.add("zdmcphdzh_zp");
+        listKey.add("zdmcphdyq_zp");
+        listKey.add("zdmcphdyh_zp");
+    }
+
+    /**
+     * 将所有模块路径集合统一存起来
+     */
+    private void addAllPath() {
+        listPath.add(afterPath);
+        listPath.add(afterPath1);
+        listPath.add(afterPath2);
+        listPath.add(afterPath3);
+        listPath.add(afterPath4);
+        listPath.add(afterPath5);
+        listPath.add(afterPath6);
+        listPath.add(afterPath7);
+        listPath.add(afterPath8);
+        listPath.add(afterPath9);
+        listPath.add(afterPath10);
+        listPath.add(afterPath11);
+        listPath.add(afterPath12);
+        listPath.add(afterPath13);
+        listPath.add(afterPath14);
+        listPath.add(afterPath15);
+        listPath.add(afterPath16);
+        listPath.add(afterPath17);
+        listPath.add(afterPath18);
+        listPath.add(afterPath19);
+        listPath.add(afterPath20);
+        listPath.add(afterPath21);
+    }
+
+    /**
+     * 保存图片
+     */
+    private void saveImages() {
+//        Map<String, RequestBody> map = new HashMap<>();
+        Map<String, Map<String, RequestBody>> mapMap = new HashMap<>();
+//        if (imagePath.size() > 0) {
+//            for (String sx : imagePath) {
+//                File file = new File(sx);
+//                RequestBody requestPic = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//                map.put(file.getName(), requestPic);
+//            }
+//        }
+//        if (map.size() > 0) {
+//        }
+        for (int i = 0; i < listPath.size(); i++) {
+            Map<String, RequestBody> map1 = new HashMap<>();
+            for (int j = 0; j < listPath.get(i).size(); j++) {
+                File file = new File(listPath.get(i).get(j));
+                RequestBody requestPic = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                map1.put(file.getName(), requestPic);
+            }
+            mapMap.put(listKey.get(i), map1);
+            uploadPics(mapMap);
+        }
+
+    }
+
+    int i = 0;
+
+    private void uploadPics(Map<String, Map<String, RequestBody>> map) {
+        //        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestPic);
+        Observable<Map<String, Object>> requestBodyObservable = AppRetrofit.getInstance()
+                .getHttpService().uploadImage("Pics", map);
+        requestBodyObservable.subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<Map<String, Object>>() {
+                    @Override
+                    public void onNext(Map<String, Object> stringObjectMap) {
+                        String json = new Gson().toJson(stringObjectMap);
+                        i++;
+                        printLogd(i + "=====" + json);
+                        Gson gson = new Gson();
+                        MaintainAddSaveImageBean saveImageBean = gson.fromJson(json, MaintainAddSaveImageBean.class);
+                        String state = saveImageBean.getState();
+                        if (Constant.STATE_SUCCESS.equals(state)) {
+                            String returnMsg = saveImageBean.getReturnMsg();
+                            showToast(returnMsg);
+                        } else {
+
+                        }
+                    }
+                });
     }
 
     Calendar myCalendar = Calendar.getInstance();
@@ -606,100 +803,100 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
         switch (requestCode) {
             case RequestCode.CHOOSE_DRIVERS_LICENSE:
                 mDriversLicenseAdapter.setData(getUris(data));
-                compressImage(getPath(path, data));
+                compressImage(getPath(path, data), afterPath);
                 break;
             case RequestCode.CHOOSE_DRIVING_LICENSE:
                 mDrivingLicenseAdapter.setData(getUris(data));
-                compressImage(getPath(path1, data));
+                compressImage(getPath(path1, data), afterPath1);
                 break;
             case RequestCode.CHOOSE_LIGHT:
                 mLightAdapter.setData(getUris(data));
-                compressImage(getPath(path2, data));
+                compressImage(getPath(path2, data), afterPath2);
                 break;
             case RequestCode.CHOOSE_WIPER_BLADE:
                 mWiperBladeAdapter.setData(getUris(data));
-                compressImage(getPath(path3, data));
+                compressImage(getPath(path3, data), afterPath3);
                 break;
             case RequestCode.CHOOSE_STORAGE_BATTERY:
                 mStorageBatteryAdapter.setData(getUris(data));
-                compressImage(getPath(path4, data));
+                compressImage(getPath(path4, data), afterPath4);
                 break;
             case RequestCode.CHOOSE_COOLING_LIQUID:
                 mCoolingLiquidAdapter.setData(getUris(data));
-                compressImage(getPath(path5, data));
+                compressImage(getPath(path5, data), afterPath5);
                 break;
             case RequestCode.CHOOSE_POWER_FLUID:
                 mPowerFluidAdapter.setData(getUris(data));
-                compressImage(getPath(path6, data));
+                compressImage(getPath(path6, data), afterPath6);
                 break;
             case RequestCode.CHOOSE_AIR_FILTER:
                 mAirFilterAdapter.setData(getUris(data));
-                compressImage(getPath(path7, data));
+                compressImage(getPath(path7, data), afterPath7);
                 break;
             case RequestCode.CHOOSE_CABIN_FILTER:
 
                 mCabinFilterAdapter.setData(getUris(data));
-                compressImage(getPath(path8, data));
+                compressImage(getPath(path8, data), afterPath8);
                 break;
             case RequestCode.CHOOSE_AIR_DAMPER:
                 mAirDamperAdapter.setData(getUris(data));
-                compressImage(getPath(path9, data));
+                compressImage(getPath(path9, data), afterPath9);
                 break;
             case RequestCode.CHOOSE_ENGINE:
                 mEngineAdapter.setData(getUris(data));
-                compressImage(getPath(path10, data));
+                compressImage(getPath(path10, data), afterPath10);
                 break;
             case RequestCode.CHOOSE_CHASSIS_ATTACHMENT:
                 mChassisAttachmentAdapter.setData(getUris(data));
-                compressImage(getPath(path11, data));
+                compressImage(getPath(path11, data), afterPath11);
                 break;
             case RequestCode.CHOOSE_CHASSIS_SCREW:
                 mChassisScrewAdapter.setData(getUris(data));
-                compressImage(getPath(path12, data));
+                compressImage(getPath(path12, data), afterPath12);
                 break;
             case RequestCode.CHOOSE_MAINTAIN_DOCUMENT:
                 mMaintainDocumentAdapter.setData(getUris(data));
-                compressImage(getPath(path13, data));
+                compressImage(getPath(path13, data), afterPath13);
                 break;
             case RequestCode.CHOOSE_THREAD_LEFT_FRONT:
                 setImageByRequestCode(ivAddLeftFront, data);
                 ivDeleteLeftFront.setVisibility(View.VISIBLE);
-                compressImage(getPath(path14, data));
+                compressImage(getPath(path14, data), afterPath14);
                 break;
             case RequestCode.CHOOSE_THREAD_LEFT_REAR:
                 setImageByRequestCode(ivAddLeftRear, data);
                 ivDeleteLeftRear.setVisibility(View.VISIBLE);
-                compressImage(getPath(path15, data));
+                compressImage(getPath(path15, data), afterPath15);
                 break;
             case RequestCode.CHOOSE_THREAD_RIGHT_FRONT:
                 setImageByRequestCode(ivAddRightFront, data);
                 ivDeleteRightFront.setVisibility(View.VISIBLE);
-                compressImage(getPath(path16, data));
+                compressImage(getPath(path16, data), afterPath16);
                 break;
             case RequestCode.CHOOSE_THREAD_RIGHT_REAR:
                 setImageByRequestCode(ivAddRightRear, data);
                 ivDeleteRightRear.setVisibility(View.VISIBLE);
-                compressImage(getPath(path17, data));
+                compressImage(getPath(path17, data), afterPath17);
                 break;
             case RequestCode.CHOOSE_BRAKE_LEFT_FRONT:
                 setImageByRequestCode(ivAddLeftFrontBrakeLining, data);
                 ivDeleteLeftFrontBrake.setVisibility(View.VISIBLE);
-                compressImage(getPath(path18, data));
+                compressImage(getPath(path18, data), afterPath18);
                 break;
             case RequestCode.CHOOSE_BRAKE_LEFT_REAR:
                 setImageByRequestCode(ivAddLeftRearBrakeLining, data);
                 ivDeleteLeftRearBrake.setVisibility(View.VISIBLE);
-                compressImage(getPath(path19, data));
+                compressImage(getPath(path19, data), afterPath19);
                 break;
             case RequestCode.CHOOSE_BRAKE_RIGHT_FRONT:
                 setImageByRequestCode(ivAddRightFrontBrakeLining, data);
                 ivDeleteRightFrontBrake.setVisibility(View.VISIBLE);
-                compressImage(getPath(path20, data));
+                compressImage(getPath(path20, data), afterPath20);
                 break;
             case RequestCode.CHOOSE_BRAKE_RIGHT_REAR:
                 setImageByRequestCode(ivAddRightRearBrakeLining, data);
                 ivDeleteRightRearBrake.setVisibility(View.VISIBLE);
-                compressImage(getPath(path21, data));
+                compressImage(getPath(path21, data), afterPath21);
                 break;
             default:
                 break;
@@ -794,45 +991,59 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
         switch (requestCode) {
             case RequestCode.CHOOSE_DRIVERS_LICENSE:
                 mDriversLicenseAdapter.deleteData(uris, position);
+                afterPath.remove(position);//点击删除将需要上传的集合中的路径也相应删除
                 break;
             case RequestCode.CHOOSE_DRIVING_LICENSE:
                 mDrivingLicenseAdapter.deleteData(uris1, position);
+                afterPath1.remove(position);
                 break;
             case RequestCode.CHOOSE_LIGHT:
                 mLightAdapter.deleteData(uris2, position);
+                afterPath2.remove(position);
                 break;
             case RequestCode.CHOOSE_WIPER_BLADE:
                 mWiperBladeAdapter.deleteData(uris3, position);
+                afterPath3.remove(position);
                 break;
             case RequestCode.CHOOSE_STORAGE_BATTERY:
                 mStorageBatteryAdapter.deleteData(uris4, position);
+                afterPath4.remove(position);
                 break;
             case RequestCode.CHOOSE_COOLING_LIQUID:
                 mCoolingLiquidAdapter.deleteData(uris5, position);
+                afterPath5.remove(position);
                 break;
             case RequestCode.CHOOSE_POWER_FLUID:
                 mPowerFluidAdapter.deleteData(uris6, position);
+                afterPath6.remove(position);
                 break;
             case RequestCode.CHOOSE_AIR_FILTER:
                 mAirFilterAdapter.deleteData(uris7, position);
+                afterPath7.remove(position);
                 break;
             case RequestCode.CHOOSE_CABIN_FILTER:
                 mCabinFilterAdapter.deleteData(uris8, position);
+                afterPath8.remove(position);
                 break;
             case RequestCode.CHOOSE_AIR_DAMPER:
                 mAirDamperAdapter.deleteData(uris9, position);
+                afterPath9.remove(position);
                 break;
             case RequestCode.CHOOSE_ENGINE:
                 mEngineAdapter.deleteData(uris10, position);
+                afterPath10.remove(position);
                 break;
             case RequestCode.CHOOSE_CHASSIS_ATTACHMENT:
                 mChassisAttachmentAdapter.deleteData(uris11, position);
+                afterPath11.remove(position);
                 break;
             case RequestCode.CHOOSE_CHASSIS_SCREW:
                 mChassisScrewAdapter.deleteData(uris12, position);
+                afterPath12.remove(position);
                 break;
             case RequestCode.CHOOSE_MAINTAIN_DOCUMENT:
                 mMaintainDocumentAdapter.deleteData(uris13, position);
+                afterPath13.remove(position);
                 break;
         }
     }
@@ -867,7 +1078,7 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
      *
      * @param path
      */
-    private void compressImage(List<String> path) {
+    private void compressImage(List<String> path, final List<String> renamePath) {
         Luban.with(this)
                 .load(path)                     //传人要压缩的图片
                 .ignoreBy(100)//图片小时100kb后不再压缩
@@ -883,9 +1094,27 @@ public class MaintainAddActivity extends BaseActivity implements View.OnClickLis
                     public void onSuccess(File file) {
                         //压缩成功后调用，返回压缩后的图片文件
                         String absolutePath = file.getAbsolutePath();
+                        String path22 = file.getPath();
+                        try {
+                            String canonicalPath = file.getCanonicalPath();
+                            printLogd("cano:::\t" + canonicalPath);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        String parent = file.getParent();
+                        printLogd("parent:::\t" + parent);
+                        printLogd("absolutePath===:\t" + absolutePath);
+                        printLogd("path22===:\t" + path22);
                         long l = file.length() / 1024;
                         printLogd("压缩后图片：" + l + "KB");
 //                        showToast("压缩成功");
+                        File file1 = new File(absolutePath);
+                        String pathname = file.getParent() + File.separator + UuidUtils.generateUuid() + ".jpg";
+                        boolean b = file1.renameTo(new File(pathname));
+                        printLogd("pathname:---:\t" + pathname);
+                        printLogd("boolean:---:\t" + b);
+                        renamePath.add(pathname);
                     }
 
                     @Override
