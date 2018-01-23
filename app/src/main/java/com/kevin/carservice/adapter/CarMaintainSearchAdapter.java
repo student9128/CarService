@@ -42,6 +42,12 @@ public class CarMaintainSearchAdapter extends RecyclerView.Adapter<CarMaintainSe
 
     }
 
+    public void clearData() {
+        this.data.clear();
+        notifyDataSetChanged();
+
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -56,11 +62,13 @@ public class CarMaintainSearchAdapter extends RecyclerView.Adapter<CarMaintainSe
         holder.tvCarNo.setText(ctntBean.getCarNo());
         holder.tvStatus.setText(ctntBean.getZt());
         String color = ctntBean.getColor();
-        String[] strings = color.split(",");
-        int r = Integer.parseInt(strings[0]);
-        int g = Integer.parseInt(strings[1]);
-        int b = Integer.parseInt(strings[2]);
-        holder.tvStatus.setTextColor(Color.rgb(r, g, b));
+        if (color != null) {
+            String[] strings = color.split(",");
+            int r = Integer.parseInt(strings[0]);
+            int g = Integer.parseInt(strings[1]);
+            int b = Integer.parseInt(strings[2]);
+            holder.tvStatus.setTextColor(Color.rgb(r, g, b));
+        }
         holder.tvTime.setText(ctntBean.getCzsj());
         holder.llMaintainItem.setOnClickListener(new View.OnClickListener() {
             @Override

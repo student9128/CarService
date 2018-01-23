@@ -10,7 +10,7 @@ package com.kevin.carservice.database;
 
 public class CarTable {
     public static final String DB_NAME = "car.db";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 6;
     public static final String DATA_TYPE_TEXT = " TEXT";
     public static final String DATA_TYPE_INTEGER = " INTEGER";
     public static final String DATA_TYPE_LONG = " LONG";
@@ -19,4 +19,7 @@ public class CarTable {
     public static final String AND = " AND ";
     public static final String TABLE_NAME = "carTable1";
     public static final String COLUMN_CAR_NUMBER = "carNumber";
+    public static final String COLUMN_CAR_STATUS = "status";
+    public static final String COLUMN_CAR_TIME = "createTime";
+    public static final String COLUMN_STATUS_COLOR = "statusColor";
 }

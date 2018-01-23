@@ -17,7 +17,6 @@ import com.kevin.carservice.bean.CarMaintainBean;
 import com.kevin.carservice.constant.Constant;
 import com.kevin.carservice.database.CarDao;
 import com.kevin.carservice.http.AppRetrofit;
-import com.kevin.carservice.utils.DeviceUtils;
 import com.kevin.carservice.view.DividerItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -84,7 +83,8 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
         mAdapter.setOnRecyclerViewItemClickListener(this);
         tvFunction.setOnClickListener(this);
         smartRefresh.setOnRefreshListener(this);
-        queryData(DeviceUtils.getIMEI(this));
+//        queryData(DeviceUtils.getIMEI(this));
+        queryData("864394010980110");
     }
 
     @Override
@@ -111,7 +111,6 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
                         if (Constant.STATE_SUCCESS.equals(state)) {
                             List<CarMaintainBean.CTNTBean> ctnt = carMaintainBean.getCTNT();
                             mAdapter.addData(ctnt);
-
 //                            insertDB(ctnt);
                         } else {
                             showToast(carMaintainBean.getReturnMsg());
@@ -122,12 +121,30 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
     }
 
     private void insertDB(List<CarMaintainBean.CTNTBean> d) {
+        carDao.deleteDatabase();
         for (int i = 0; i < d.size(); i++) {
             String carNo = d.get(i).getCarNo();
             String time = d.get(i).getCzsj();
             String status = d.get(i).getZt();
-            carDao.insert(carNo, status, time);
+            String color = d.get(i).getColor();
+            carDao.insert(carNo, status, time, color);
         }
+//        CarDataHelper instance = new CarDataHelper(this);
+//        SQLiteDatabase writableDatabase = instance.getWritableDatabase();
+//        String x = "7";
+//        String sql = "select * from carTable where carNumber like '%" + x + "%'";
+//        Cursor cursor = writableDatabase.rawQuery(sql, null);
+//        cursor.moveToFirst();
+//        while (cursor.moveToNext()) {
+//            String carNumber = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_CAR_NUMBER));
+//            String status = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_CAR_STATUS));
+//            String createTime = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_CAR_TIME));
+//            String statusColor = cursor.getString(cursor.getColumnIndex(CarTable.COLUMN_STATUS_COLOR));
+//            LogK.d(TAG, "carNumber:\t" + carNumber);
+//            LogK.d(TAG, "status:\t" + status);
+//            LogK.d(TAG, "createTime:\t" + createTime);
+//            LogK.d(TAG, "statusColor:\t" + statusColor);
+//        }
     }
 
     private void finishRefresh() {
@@ -151,6 +168,7 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-        queryData(DeviceUtils.getIMEI(this));
+//        queryData(DeviceUtils.getIMEI(this));
+        queryData("864394010980110");
     }
 }

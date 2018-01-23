@@ -18,7 +18,6 @@ import com.kevin.carservice.bean.CarMaintainBean;
 import com.kevin.carservice.constant.Constant;
 import com.kevin.carservice.database.CarDao;
 import com.kevin.carservice.http.AppRetrofit;
-import com.kevin.carservice.utils.DeviceUtils;
 import com.kevin.carservice.view.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2018/1/20.
  * <h3>Description:</h3>
  * <div>
+ * 通过关键字搜索
  * </div>
  */
 
@@ -66,7 +66,9 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher,
         tvTitle.setText("车辆维修");
         tvFunction.setText("新增");
 //        carDao = new CarDao();
-        queryData(DeviceUtils.getIMEI(this));
+//        通过查询数据库来进行相应搜索有bug
+//        queryData(DeviceUtils.getIMEI(this));
+        queryData("864394010980110");
     }
 
     @Override
@@ -109,6 +111,13 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher,
             searchData.clear();
             mAdapter.addData(searchData);
         }
+//        if (s.length() > 0) {
+//            List<CarMaintainBean.CTNTBean> ctntBeans = carDao.queryByKeyLetter(searchData, s);
+//            mAdapter.addData(ctntBeans);
+//        } else {
+//            mAdapter.clearData();
+//        }
+
     }
 
     @Override

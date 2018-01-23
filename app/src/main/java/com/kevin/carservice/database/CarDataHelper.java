@@ -1,11 +1,11 @@
 package com.kevin.carservice.database;
 
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.kevin.carservice.base.BaseApplication;
+import com.kevin.carservice.utils.LogK;
 
 /**
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2018/1/20.
@@ -18,6 +18,7 @@ import com.kevin.carservice.base.BaseApplication;
 public class CarDataHelper extends SQLiteOpenHelper {
 
     private static CarDataHelper INSTANCE;
+    private static final String TAG = "CarDataHelper.class";
 
     public static CarDataHelper getInstance() {
         if (INSTANCE == null) {
@@ -30,20 +31,12 @@ public class CarDataHelper extends SQLiteOpenHelper {
         super(context, CarTable.DB_NAME, null, CarTable.DB_VERSION);
     }
 
-    public CarDataHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
-
-    public CarDataHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //create table if not exists carTable(_id integer primary key, carNumber text)
-//        String sql = "CREATE TABLE IF NOT EXISTS " + CarTable.TABLE_NAME + "(" + "_id"
-//                + " INTEGER PRIMARY KEY," + CarTable.COLUMN_CAR_NUMBER + CarTable.DATA_TYPE_TEXT + ")";
-        String sql = "create table if not exists carTable1(_id integer primary key, carNumber varchar,status varchar,time varchar);";
+        String sql = "create table if not exists " + CarTable.TABLE_NAME
+                + "(_id integer primary key autoincrement, " + CarTable.COLUMN_CAR_NUMBER + " text,"
+                + CarTable.COLUMN_CAR_STATUS + " text," + CarTable.COLUMN_CAR_TIME + " text,"
+                + CarTable.COLUMN_STATUS_COLOR + " text);";
         sqLiteDatabase.execSQL(sql);
     }
 
@@ -52,5 +45,6 @@ public class CarDataHelper extends SQLiteOpenHelper {
         String sql = "DROP TABLE IF EXISTS " + CarTable.TABLE_NAME;
         sqLiteDatabase.execSQL(sql);
         onCreate(sqLiteDatabase);
+        LogK.d(TAG, "onUpgrade: upgrade database");
     }
 }
