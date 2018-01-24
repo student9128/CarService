@@ -14,14 +14,20 @@ import com.kevin.carservice.adapter.CarMaintainAdapter;
 import com.kevin.carservice.base.BaseActivity;
 import com.kevin.carservice.base.BaseObserver;
 import com.kevin.carservice.bean.CarMaintainBean;
+import com.kevin.carservice.cardatadao.CarDataEntityDao;
+import com.kevin.carservice.cardatadao.DaoMaster;
+import com.kevin.carservice.cardatadao.DaoSession;
 import com.kevin.carservice.constant.Constant;
-import com.kevin.carservice.database.CarDao;
+import com.kevin.carservice.database.CarDataEntity;
+import com.kevin.carservice.database.CarTable;
 import com.kevin.carservice.http.AppRetrofit;
 import com.kevin.carservice.view.DividerItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.greendao.rx.RxDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +57,12 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
     SmartRefreshLayout smartRefresh;
     private CarMaintainAdapter mAdapter;
     private List<CarMaintainBean.CTNTBean> data = new ArrayList<>();
-    private CarDao carDao;
+    //    private CarDao carDao;
+    private DaoMaster.DevOpenHelper mDevOpenHelper;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
+    private CarDataEntityDao mCarDataEntityDao;
+    private RxDao<CarDataEntity, Long> mCarDataEntityLongRxDao;
 
     @Override
     public int setLayoutResId() {
@@ -62,8 +73,9 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
     public void initView() {
         tvTitle.setText("车辆维修");
         tvFunction.setText("新增");
-        carDao = new CarDao();
+//        carDao = new CarDao();
 //        carDao.deleteDatabase();
+        openDb();
     }
 
     @Override
@@ -112,6 +124,8 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
                             List<CarMaintainBean.CTNTBean> ctnt = carMaintainBean.getCTNT();
                             mAdapter.addData(ctnt);
 //                            insertDB(ctnt);
+                            insert(ctnt);
+                            retrieve("00");
                         } else {
                             showToast(carMaintainBean.getReturnMsg());
                         }
@@ -121,13 +135,13 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
     }
 
     private void insertDB(List<CarMaintainBean.CTNTBean> d) {
-        carDao.deleteDatabase();
+//        carDao.deleteDatabase();
         for (int i = 0; i < d.size(); i++) {
             String carNo = d.get(i).getCarNo();
             String time = d.get(i).getCzsj();
             String status = d.get(i).getZt();
             String color = d.get(i).getColor();
-            carDao.insert(carNo, status, time, color);
+//            carDao.insert(carNo, status, time, color);
         }
 //        CarDataHelper instance = new CarDataHelper(this);
 //        SQLiteDatabase writableDatabase = instance.getWritableDatabase();
@@ -171,4 +185,56 @@ public class MainActivity extends BaseActivity implements CarMaintainAdapter.OnR
 //        queryData(DeviceUtils.getIMEI(this));
         queryData("864394010980110");
     }
+
+    private void openDb() {
+        mDevOpenHelper = new DaoMaster.DevOpenHelper(this, CarTable.DB_NAME);
+        mDaoMaster = new DaoMaster(mDevOpenHelper.getWritableDb());
+        mDaoSession = mDaoMaster.newSession();
+        mCarDataEntityDao = mDaoSession.getCarDataEntityDao();
+//        mCarDataEntityLongRxDao = mDaoSession.getCarDataEntityDao().rx();
+    }
+
+    private void insert(List<CarMaintainBean.CTNTBean> d) {
+        mCarDataEntityDao.deleteAll();
+        for (int i = 0; i < d.size(); i++) {
+            String carNo = d.get(i).getCarNo();
+            String zt = d.get(i).getZt();
+            String czsj = d.get(i).getCzsj();
+            String color = d.get(i).getColor();
+            CarDataEntity carDataEntity = new CarDataEntity(null, carNo, zt, czsj, color);
+            mCarDataEntityDao.insert(carDataEntity);
+        }
+    }
+
+    /**
+     * Rx版暂时有问题
+     *
+     * @param carNumber
+     * @param status
+     * @param createTime
+     * @param statusColor
+     */
+    private void insertRx(String carNumber, String status, String createTime, String statusColor) {
+        CarDataEntity carDataEntity = new CarDataEntity();
+        carDataEntity.setCarNumber(carNumber);
+        carDataEntity.setStatus(status);
+        carDataEntity.setCreateTime(createTime);
+        carDataEntity.setStatusColor(statusColor);
+
+//        mCarDataEntityLongRxDao.insert(carDataEntity);
+    }
+
+    private void retrieve(String key) {
+        List<CarDataEntity> carDataEntities = mCarDataEntityDao.queryRaw("where carNumber like ?", new String[]{"%" + key + "%"});
+        if (carDataEntities.size() > 0) {
+
+            for (int i = 0; i < carDataEntities.size(); i++) {
+                String carNumber = carDataEntities.get(i).getCarNumber();
+                printLogd("carNumber:\t" + carNumber);
+            }
+        } else {
+            showToast("未查到数据");
+        }
+    }
+
 }

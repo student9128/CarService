@@ -12,11 +12,17 @@ import android.widget.TextView;
 
 import com.kevin.carservice.R;
 import com.kevin.carservice.adapter.CarMaintainSearchAdapter;
+import com.kevin.carservice.adapter.CarMaintainSearchGreenAdapter;
 import com.kevin.carservice.base.BaseActivity;
 import com.kevin.carservice.base.BaseObserver;
 import com.kevin.carservice.bean.CarMaintainBean;
+import com.kevin.carservice.cardatadao.CarDataEntityDao;
+import com.kevin.carservice.cardatadao.DaoMaster;
+import com.kevin.carservice.cardatadao.DaoSession;
 import com.kevin.carservice.constant.Constant;
 import com.kevin.carservice.database.CarDao;
+import com.kevin.carservice.database.CarDataEntity;
+import com.kevin.carservice.database.CarTable;
 import com.kevin.carservice.http.AppRetrofit;
 import com.kevin.carservice.view.DividerItemDecoration;
 
@@ -39,7 +45,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 
-public class MaintainSearchActivity extends BaseActivity implements TextWatcher, CarMaintainSearchAdapter.OnRecyclerItemClickListener, View.OnClickListener {
+public class MaintainSearchActivity extends BaseActivity implements TextWatcher, CarMaintainSearchAdapter.OnRecyclerItemClickListener, View.OnClickListener, CarMaintainSearchGreenAdapter.OnRecyclerItemClickListener {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.iv_search)
@@ -55,6 +61,13 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher,
     private List<CarMaintainBean.CTNTBean> datax = new ArrayList<>();
     private List<CarMaintainBean.CTNTBean> searchData = new ArrayList<>();
     private CarMaintainSearchAdapter mAdapter;
+    private DaoMaster.DevOpenHelper mDevOpenHelper;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
+    private CarDataEntityDao mCarDataEntityDao;
+    private List<CarDataEntity> dataEntities = new ArrayList<>();
+    private List<CarDataEntity> dataEn = new ArrayList<>();
+    private CarMaintainSearchGreenAdapter greenAdapter;
 
     @Override
     public int setLayoutResId() {
@@ -69,6 +82,7 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher,
 //        通过查询数据库来进行相应搜索有bug
 //        queryData(DeviceUtils.getIMEI(this));
         queryData("864394010980110");
+        openDb();
     }
 
     @Override
@@ -77,15 +91,17 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher,
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         dividerItemDecoration.setDivider(R.drawable.bg_recycler_divider);
         rvRecyclerView.addItemDecoration(dividerItemDecoration);
-        mAdapter = new CarMaintainSearchAdapter(this, data);
-        rvRecyclerView.setAdapter(mAdapter);
+//        mAdapter = new CarMaintainSearchAdapter(this, data);
+        greenAdapter = new CarMaintainSearchGreenAdapter(this, dataEn);
+        rvRecyclerView.setAdapter(greenAdapter);
     }
 
     @Override
     public void initListener() {
         etNameSearch.addTextChangedListener(this);
-        mAdapter.setOnRecyclerViewItemClickListener(this);
+//        mAdapter.setOnRecyclerViewItemClickListener(this);
         tvFunction.setOnClickListener(this);
+        greenAdapter.setOnRecyclerViewItemClickListener(this);
     }
 
     @Override
@@ -98,25 +114,33 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher,
 
         String s = charSequence.toString();
 //        List<CarMaintainBean.CTNTBean> strings = carDao.queryByKeyLetter(datax, s);
-        if (datax.size() > 0 && s.length() > 0) {
-            searchData.clear();
-            for (int i = 0; i < datax.size(); i++) {
-                String carNo = datax.get(i).getCarNo();
-                if (carNo.contains(s)) {
-                    searchData.add(datax.get(i));
-                }
-            }
-            mAdapter.addData(searchData);
-        } else {
-            searchData.clear();
-            mAdapter.addData(searchData);
-        }
+//        if (datax.size() > 0 && s.length() > 0) {
+//            searchData.clear();
+//            for (int i = 0; i < datax.size(); i++) {
+//                String carNo = datax.get(i).getCarNo();
+//                if (carNo.contains(s)) {
+//                    searchData.add(datax.get(i));
+//                }
+//            }
+//            mAdapter.addData(searchData);
+//        } else {
+//            searchData.clear();
+//            mAdapter.addData(searchData);
+//        }
+        //*********************************************************//
 //        if (s.length() > 0) {
 //            List<CarMaintainBean.CTNTBean> ctntBeans = carDao.queryByKeyLetter(searchData, s);
 //            mAdapter.addData(ctntBeans);
 //        } else {
 //            mAdapter.clearData();
 //        }
+        //*********************************************************//
+        if (s.length() > 0) {
+            List<CarDataEntity> retrieve = retrieve(dataEntities, s);
+            greenAdapter.addData(retrieve);
+        } else {
+            greenAdapter.clearData();
+        }
 
     }
 
@@ -163,5 +187,32 @@ public class MaintainSearchActivity extends BaseActivity implements TextWatcher,
                 startNewActivity(MaintainAddActivity.class);
                 break;
         }
+    }
+
+    private void openDb() {
+        mDevOpenHelper = new DaoMaster.DevOpenHelper(this, CarTable.DB_NAME);
+        mDaoMaster = new DaoMaster(mDevOpenHelper.getWritableDb());
+        mDaoSession = mDaoMaster.newSession();
+        mCarDataEntityDao = mDaoSession.getCarDataEntityDao();
+//        mCarDataEntityLongRxDao = mDaoSession.getCarDataEntityDao().rx();
+    }
+
+    private List<CarDataEntity> retrieve(List<CarDataEntity> entities, String key) {
+        entities.clear();
+        List<CarDataEntity> carDataEntities = mCarDataEntityDao.queryRaw("where carNumber like ?", new String[]{"%" + key + "%"});
+        if (carDataEntities.size() > 0) {
+            int size = carDataEntities.size();
+            printLogd("size:\t" + size);
+            for (int i = 0; i < carDataEntities.size(); i++) {
+                String carNumber = carDataEntities.get(i).getCarNumber();
+                printLogd("carNumber:\t" + carNumber);
+                String status = carDataEntities.get(i).getStatus();
+                String createTime = carDataEntities.get(i).getCreateTime();
+                String statusColor = carDataEntities.get(i).getStatusColor();
+                CarDataEntity carDataEntity = new CarDataEntity(null, carNumber, status, createTime, statusColor);
+                entities.add(carDataEntity);
+            }
+        }
+        return entities;
     }
 }
